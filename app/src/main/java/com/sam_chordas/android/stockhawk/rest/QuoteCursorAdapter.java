@@ -16,6 +16,7 @@ import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.touch_helper.ItemTouchHelperAdapter;
 import com.sam_chordas.android.stockhawk.touch_helper.ItemTouchHelperViewHolder;
+import com.sam_chordas.android.stockhawk.utils.JsonParserUtils;
 
 /**
  * Created by sam_chordas on 10/6/15.
@@ -65,7 +66,7 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
             mContext.getResources().getDrawable(R.drawable.percent_change_pill_red));
       }
     }
-    if (Utils.showPercent){
+    if (JsonParserUtils.showPercent){
       viewHolder.change.setText(cursor.getString(cursor.getColumnIndex("percent_change")));
     } else{
       viewHolder.change.setText(cursor.getString(cursor.getColumnIndex("change")));

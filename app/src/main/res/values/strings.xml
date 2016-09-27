@@ -9,9 +9,12 @@
   <string name="content_test">Search for a Stock Symbol</string>
   <string name="input_hint">FB</string>
   <string name="input_prefill"></string>
-  <string name="network_toast">Uh-oh! This app requires an internet connection</string>
 
   <string name="cd_add_new_stock_button">Add new stock button</string>
   <string name="cd_chart">The chart that show stock description by time</string>
 
+  <string name="common_error">Ups! Something went wrong</string>
+  <string name="network_toast">Uh-oh! This app requires an internet connection</string>
+  <string name="input_error">Check your input</string>
+  <string name="saved_stock_warning">This stock is already saved!</string>
 </resources>
