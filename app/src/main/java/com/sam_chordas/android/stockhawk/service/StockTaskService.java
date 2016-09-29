@@ -47,6 +47,10 @@ public class StockTaskService extends GcmTaskService {
 
     private boolean isUpdate;
 
+    public StockTaskService() {
+        // required constructor
+    }
+
     public StockTaskService(@NonNull Context context) {
         attachBaseContext(context);
     }
@@ -133,6 +137,7 @@ public class StockTaskService extends GcmTaskService {
         int result = GcmNetworkManager.RESULT_FAILURE;
         try {
             String response = fetchData(urlString);
+            Log.d(LOG_TAG, String.format("Response: %s", response));
             result = GcmNetworkManager.RESULT_SUCCESS;
             ContentValues contentValues = new ContentValues();
             // update ISCURRENT to 0 (false) so new data is current

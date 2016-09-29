@@ -109,8 +109,10 @@ public final class JsonParserUtils {
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(LOG_TAG, "String to JSON failed: " + e);
         } catch (Exception ignored) {
+            Log.e(LOG_TAG, "Unknown exception");
+            ignored.printStackTrace();
             return null;
         }
         return builder.build();

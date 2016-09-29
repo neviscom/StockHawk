@@ -1,6 +1,8 @@
 <resources>
   <string name="app_name">Stock Hawk</string>
 
+  <string name="stock_line_title">Line Graph</string>
+
   <string name="action_example">Example action</string>
 
   <string name="action_settings">Settings</string>
@@ -17,4 +19,6 @@
   <string name="network_toast">Uh-oh! This app requires an internet connection</string>
   <string name="input_error">Check your input</string>
   <string name="saved_stock_warning">This stock is already saved!</string>
+
+  <string name="stock_information_empty">Stock information is empty</string>
 </resources>

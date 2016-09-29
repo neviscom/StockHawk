@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <com.db.chart.view.LineChartView
-        android:contentDescription="@string/cd_chart"
         android:id="@+id/linechart"
+        xmlns:chart="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:contentDescription="@string/cd_chart"
+        chart:chart_axisBorderSpacing="@dimen/axis_dist_from_label"
+        chart:chart_axisColor="@color/material_blue_500"
+        chart:chart_axisThickness="@dimen/axis_thickness"
+        chart:chart_axisTopSpacing="@dimen/axis_dist_from_label"
+        chart:chart_labelColor="@color/material_blue_500"/>
+
+    <TextView
+        android:id="@+id/stock_empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/stock_information_empty"
+        android:visibility="gone"/>
 
 </FrameLayout>

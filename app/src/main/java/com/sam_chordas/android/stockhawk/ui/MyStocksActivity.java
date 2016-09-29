@@ -73,8 +73,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                     new RecyclerViewItemClickListener.OnItemClickListener() {
                         @Override
                         public void onItemClick(View v, int position) {
-                            //TODO:
-                            // do something on item click
+                            onStockItemClick(position);
                         }
                     }));
             recyclerView.setAdapter(mCursorAdapter);
@@ -97,7 +96,9 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 
         getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
 
-        createPeriodicTask();
+        if (isConnected) {
+            createPeriodicTask();
+        }
     }
 
 
@@ -226,6 +227,14 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         // Schedule task with tag "periodic." This ensure that only the stocks present in the DB
         // are updated.
         GcmNetworkManager.getInstance(this).schedule(periodicTask);
+    }
+
+    private void onStockItemClick(int position) {
+        Cursor cursor = mCursorAdapter.getCursor();
+        if (cursor != null && !cursor.isClosed() && cursor.moveToPosition(position)) {
+            String symbol = cursor.getString(cursor.getColumnIndex(QuoteColumns.SYMBOL));
+            StocksLineActivity.launch(MyStocksActivity.this, symbol);
+        }
     }
 
 }
