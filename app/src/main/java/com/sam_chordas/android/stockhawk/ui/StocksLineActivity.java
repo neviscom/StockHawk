@@ -2,6 +2,7 @@ package com.sam_chordas.android.stockhawk.ui;
 
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -34,12 +35,17 @@ public class StocksLineActivity extends AppCompatActivity implements LoaderManag
     private String mSymbol;
 
     private LineChartView mLineChartView;
-    private View mEmptyview;
+    private View mEmptyView;
 
     public static void launch(@NonNull Activity activity, @NonNull String symbol) {
-        Intent intent = new Intent(activity, StocksLineActivity.class);
+        activity.startActivity(getStartIntent(activity, symbol));
+    }
+
+    @NonNull
+    public static Intent getStartIntent(@NonNull Context context, @NonNull String symbol) {
+        Intent intent = new Intent(context, StocksLineActivity.class);
         intent.putExtra(EXTRA_SYMBOL, symbol);
-        activity.startActivity(intent);
+        return intent;
     }
 
     @Override
@@ -50,7 +56,7 @@ public class StocksLineActivity extends AppCompatActivity implements LoaderManag
         mSymbol = getIntent().getStringExtra(EXTRA_SYMBOL);
         setTitle(mSymbol);
 
-        mEmptyview = findViewById(R.id.stock_empty_view);
+        mEmptyView = findViewById(R.id.stock_empty_view);
         mLineChartView = (LineChartView) findViewById(R.id.linechart);
         if (mLineChartView != null) {
             initChart();
@@ -118,13 +124,13 @@ public class StocksLineActivity extends AppCompatActivity implements LoaderManag
     }
 
     private void showChart() {
-        mEmptyview.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.GONE);
         mLineChartView.setVisibility(View.VISIBLE);
         mLineChartView.show();
     }
 
     private void showEmptyView() {
-        mEmptyview.setVisibility(View.VISIBLE);
+        mEmptyView.setVisibility(View.VISIBLE);
         mLineChartView.setVisibility(View.GONE);
     }
 }

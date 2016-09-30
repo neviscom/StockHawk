@@ -33,6 +33,8 @@ import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallb
 import com.sam_chordas.android.stockhawk.utils.JsonParserUtils;
 import com.sam_chordas.android.stockhawk.utils.NetworkUtils;
 
+import static com.sam_chordas.android.stockhawk.service.StockIntentService.INIT;
+
 public class MyStocksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     /**
@@ -56,13 +58,10 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
             networkToast();
         }
 
-        // The intent service is for executing immediate pulls from the Yahoo API
-        // GCMTaskService can only schedule tasks, they cannot execute immediately
-        mServiceIntent = new Intent(this, StockIntentService.class);
         if (savedInstanceState == null) {
-            // Run the initialize task service so that some stocks appear upon an empty database
-            mServiceIntent.putExtra("tag", "init");
-            startService(mServiceIntent);
+            // The intent service is for executing immediate pulls from the Yahoo API
+            // GCMTaskService can only schedule tasks, they cannot execute immediately
+            StockIntentService.start(this, INIT);
         }
 
         mCursorAdapter = new QuoteCursorAdapter(this, null);
@@ -189,9 +188,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                             MyToast.showToast(MyStocksActivity.this, R.string.saved_stock_warning);
                         } else {
                             // Add the stock to DB
-                            mServiceIntent.putExtra("tag", "add");
-                            mServiceIntent.putExtra("symbol", input.toString());
-                            startService(mServiceIntent);
+                            StockIntentService.start(MyStocksActivity.this, StockIntentService.ADD, input.toString());
                         }
                     }
                 })

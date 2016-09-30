@@ -1,6 +1,7 @@
 package com.sam_chordas.android.stockhawk.data;
 
 import android.net.Uri;
+
 import net.simonvt.schematic.annotation.ContentProvider;
 import net.simonvt.schematic.annotation.ContentUri;
 import net.simonvt.schematic.annotation.InexactContentUri;
@@ -13,7 +14,7 @@ import net.simonvt.schematic.annotation.TableEndpoint;
 public class QuoteProvider {
   public static final String AUTHORITY = "com.sam_chordas.android.stockhawk.data.QuoteProvider";
 
-  static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+  private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
   interface Path{
     String QUOTES = "quotes";
