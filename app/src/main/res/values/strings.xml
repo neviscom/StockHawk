@@ -9,8 +9,8 @@
     <string name="action_change_units">Change Units</string>
     <string name="symbol_search">Symbol Search</string>
     <string name="content_test">Search for a Stock Symbol</string>
-    <string name="input_hint">FB</string>
-    <string name="input_prefill"></string>
+    <string name="input_hint" translatable="false">FB</string>
+    <string name="input_prefill" translatable="false"/>
 
     <string name="cd_add_new_stock_button">Add new stock button</string>
     <string name="cd_chart">The chart that show stock description by time</string>
@@ -25,6 +25,5 @@
 
     <string name="appwidget_text">Stock Widget</string>
     <string name="add_widget">Add widget</string>
-
 
 </resources>

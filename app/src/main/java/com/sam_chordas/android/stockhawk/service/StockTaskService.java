@@ -37,7 +37,9 @@ import java.util.ArrayList;
  * and is used for the initialization and adding task as well.
  */
 public class StockTaskService extends GcmTaskService {
-    private String LOG_TAG = StockTaskService.class.getSimpleName();
+
+    private static final String LOG_TAG = StockTaskService.class.getSimpleName();
+    private static final String ENCODE = "UTF-8";
 
     @NonNull
     private final OkHttpClient client = new OkHttpClient();
@@ -71,7 +73,7 @@ public class StockTaskService extends GcmTaskService {
         urlStringBuilder.append("https://query.yahooapis.com/v1/public/yql?q=");
         try {
             urlStringBuilder.append(URLEncoder.encode("select * from yahoo.finance.quotes where symbol "
-                    + "in (", "UTF-8"));
+                    + "in (", ENCODE));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -100,7 +102,7 @@ public class StockTaskService extends GcmTaskService {
             // Init task. Populates DB with quotes for the symbols seen below
             try {
                 urlStringBuilder.append(
-                        URLEncoder.encode("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")", "UTF-8"));
+                        URLEncoder.encode("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")", ENCODE));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -116,7 +118,7 @@ public class StockTaskService extends GcmTaskService {
             }
             mStoredSymbols.replace(mStoredSymbols.length() - 1, mStoredSymbols.length(), ")");
             try {
-                urlStringBuilder.append(URLEncoder.encode(mStoredSymbols.toString(), "UTF-8"));
+                urlStringBuilder.append(URLEncoder.encode(mStoredSymbols.toString(), ENCODE));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -127,7 +129,7 @@ public class StockTaskService extends GcmTaskService {
         // get symbol from params.getExtra and build query
         String stockInput = params.getExtras().getString(StockIntentService.EXTRA_SYMBOL);
         try {
-            urlStringBuilder.append(URLEncoder.encode("\"" + stockInput + "\")", "UTF-8"));
+            urlStringBuilder.append(URLEncoder.encode("\"" + stockInput + "\")", ENCODE));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

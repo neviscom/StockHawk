@@ -101,11 +101,14 @@ public class StocksLineActivity extends AppCompatActivity implements LoaderManag
 
         do {
             String label = data.getString(data.getColumnIndex(QuoteColumns.BIDPRICE));
-            float value = Float.parseFloat(label.replace(',', '.'));
-            lineSet.addPoint(label, value);
+            try {
+                float value = Float.parseFloat(label.replace(',', '.'));
+                lineSet.addPoint(label, value);
 
-            maxBorderValue = Math.max(maxBorderValue, value);
-            minBorderValue = Math.min(minBorderValue, value);
+                maxBorderValue = Math.max(maxBorderValue, value);
+                minBorderValue = Math.min(minBorderValue, value);
+            } catch (NumberFormatException ignore) {
+            }
         } while (data.moveToNext());
 
         lineSet.setColor(ContextCompat.getColor(this, R.color.material_green_700))
