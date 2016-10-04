@@ -107,7 +107,8 @@ public class StocksLineActivity extends AppCompatActivity implements LoaderManag
 
                 maxBorderValue = Math.max(maxBorderValue, value);
                 minBorderValue = Math.min(minBorderValue, value);
-            } catch (NumberFormatException ignore) {
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
         } while (data.moveToNext());
 
